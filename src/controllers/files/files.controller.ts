@@ -1,14 +1,22 @@
 import type { Request, Response } from "express";
-import { readExcelService } from "../../services/files.service";
+import {
+  readExcelService,
+} from "../../services/files.service";
+import fs from "fs";
+import { RegistroPresupuestario } from "../../utils/types";
+import { saveExcelDataToDb } from "../../services/database.service";
 
 export const readExcelController = async (req: Request, res: Response) => {
-  console.log("--------------->", req);
   try {
     const excelFile = req.file;
     if (!excelFile) {
       res.status(400).json({ error: "No se ha enviado ningún archivo" });
     }
-    await readExcelService(excelFile!);
+    const dataToDb = await readExcelService(excelFile!);
+    await saveExcelDataToDb(dataToDb as RegistroPresupuestario[]);
+    if (req.file && req.file.path) {
+      fs.unlinkSync(req.file.path);
+    }
     res.status(200).json({
       success: true,
       message: "Archivo cargado correctamente",
