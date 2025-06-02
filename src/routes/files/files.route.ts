@@ -5,6 +5,6 @@ import multer from "multer";
 const upload = multer({ dest: "uploads/" });
 const routerFiles = Router();
 
-routerFiles.post("/read", upload.single("archivo"), readExcelController);
+routerFiles.post("/read", upload.single("informacion-presupuestaria"), readExcelController);
 
 export default routerFiles;
