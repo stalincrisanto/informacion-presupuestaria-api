@@ -29,9 +29,16 @@ export const saveExcelDataToDb = async (data: RegistroPresupuestario[]) => {
   }
 };
 
-export const getAllRecords = async () => {
+export const getAllRecords = async (periodo: number, anio: number) => {
+  console.log("Obteniendo registros para periodo:", periodo, "año:", anio);
   try {
-    const records = await prisma.registroPresupuestario.findMany();
+    const records = await prisma.registroPresupuestario.findMany({
+      where: {
+        PERIODO: periodo,
+        ANIO: anio,
+      },
+    });
+    console.log("Registros obtenidos:", records.length);
     const data = records.map(({ id, createdAt, updatedAt, ...record }) => ({
       ...record,
     }));
