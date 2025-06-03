@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { loginUser } from "../../services/auth.service";
 
 export const loginController = async (req: Request, res: Response) => {
-  console.log("Login controller called", req.body);
   try {
     const { username, password } = req.body;
 
@@ -19,7 +18,7 @@ export const loginController = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(401).json({
       success: false,
-      message: "Error en la autenticación",
+      message: "Credenciales inválidas",
     });
   }
 };

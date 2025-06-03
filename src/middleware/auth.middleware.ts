@@ -18,7 +18,10 @@ export const authenticateJWT = (
     if (!authHeader) {
       res
         .status(401)
-        .json({ message: "No se proporcionó token de autenticación" });
+        .json({
+          success: false,
+          message: "No se proporcionó token de autenticación",
+        });
     }
 
     // 2. Verificar formato Bearer token

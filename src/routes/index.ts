@@ -1,7 +1,7 @@
 import { Router } from "express";
 import routerFiles from "./files/files.route";
 import routerRecords from "./records/records.route";
-import routerLogin from "./auth/auth.router";
+import routerLogin from "./auth/auth.route";
 
 const router = Router();
 

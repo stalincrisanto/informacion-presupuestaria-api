@@ -19,7 +19,9 @@ const options: swaggerJsdoc.Options = {
     ],
   },
   apis: [
-    path.join(__dirname, '../routes/**/*.ts'), // Ruta a tus archivos de rutas
+    path.join(__dirname, '../routes/**/*.ts'),
+    // path.join(__dirname, '../docs/swagger/**/*.yaml'),
+    // path.join(__dirname, 'docs/**/*.yaml'),
   ],
 };
 

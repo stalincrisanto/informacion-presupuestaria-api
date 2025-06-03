@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *   name: Auth
- *   description: Autenticación de usuarios
+ *   description: Autenticación de api
  */
 import { Router } from "express";
 import { loginController } from "../../controllers/auth/auth.controller";
@@ -50,8 +50,9 @@ const routerLogin = Router();
  *                       type: integer
  *                     username:
  *                       type: string
- *                     role:
- *                       type: string
+ *       400:
+ *         description: Usuario y contraseña son requeridos
+ *
  *       401:
  *         description: Credenciales inválidas
  */
