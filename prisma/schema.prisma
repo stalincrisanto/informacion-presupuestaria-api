@@ -8,40 +8,42 @@ datasource db {
 }
 
 model RegistroPresupuestario {
-  id              Int     @id @default(autoincrement())
-  TIPO_CEDULA     Int
-  PERIODO         Int
-  ANIO            Int
-  COD_PROG        String
-  PROGRAMA        String
-  COD_PROY        String
-  PROYECTO        String
-  COD_ACTIVIDAD   String
-  ACTIVIDAD       String
-  COD_OBRA        String
-  OBRA            String
-  COD_TAREA       String
-  TAREA           String
-  COD_FUENTE      Int
-  PARTIDA         Int
-  ASIGNACION      Float   @default(0.00)
-  REFORMAS        Float   @default(0.00)
-  CODIFICADO      Float   @default(0.00)
-  CERTIFICACION   Float   @default(0.00)
-  COMPROMISOS     Float   @default(0.00)
-  DEVENGADO       Float   @default(0.00)
-  PAGADO          Float   @default(0.00)
-  createdAt       DateTime @default(now()) @map("created_at")
-  updatedAt       DateTime @updatedAt @map("updated_at")
+  id            Int      @id @default(autoincrement())
+  TIPO_CEDULA   Int
+  PERIODO       Int
+  ANIO          Int
+  COD_PROG      String
+  PROGRAMA      String
+  COD_PROY      String
+  PROYECTO      String
+  COD_ACTIVIDAD String
+  ACTIVIDAD     String
+  COD_OBRA      String
+  OBRA          String
+  COD_TAREA     String
+  TAREA         String
+  COD_FUENTE    Int
+  PARTIDA       Int
+  ASIGNACION    Float    @default(0.00)
+  REFORMAS      Float    @default(0.00)
+  CODIFICADO    Float    @default(0.00)
+  CERTIFICACION Float    @default(0.00)
+  COMPROMISOS   Float    @default(0.00)
+  DEVENGADO     Float    @default(0.00)
+  PAGADO        Float    @default(0.00)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
 
   // @@unique([PERIODO, ANIO, COD_PROY, COD_ACTIVIDAD, COD_TAREA, COD_FUENTE, PARTIDA], name: "registro_unico")
   @@map("registros_presupuestarios")
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  username String  @unique
-  password String
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@map("users")
 }
