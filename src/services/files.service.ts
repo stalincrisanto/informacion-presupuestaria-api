@@ -8,15 +8,24 @@ export const readExcelService = (excelFile: Express.Multer.File) => {
   const rawData = utils.sheet_to_json<Record<string, any>>(hoja!, {
     defval: "",
     raw: false,
+    header: 1,
+    blankrows: false,
+    skipHidden: true
   });
 
-  const processedData = rawData.map((row) => {
+  // Obtener los encabezados de la primera fila
+  const headers = rawData[0] as string[];
+  
+  // Procesar el resto de las filas
+  const processedData = rawData.slice(1).map((row: Record<string, any>) => {
     const newRow: Record<string, any> = {};
-
-    for (const [key, value] of Object.entries(row)) {
-      const formattedKey = formatKey(key);
-      newRow[formattedKey] = parseValue(value, formattedKey);
-    }
+    
+    headers.forEach((header, index) => {
+      if (header) { // Solo procesar columnas con encabezado
+        const formattedKey = formatKey(header);
+        newRow[formattedKey] = parseValue(row[index], formattedKey);
+      }
+    });
 
     return newRow;
   });
